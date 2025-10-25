@@ -1,0 +1,172 @@
+<div class="tasks-container">
+  <!-- Header -->
+  <div class="tasks-header">
+    <div class="header-content">
+      <h1 class="page-title">
+        <span class="gradient-text">My Tasks</span>
+        @if (isDemoMode) {
+          <span class="demo-badge">DEMO MODE</span>
+        }
+      </h1>
+      <p class="page-subtitle">
+        {{ isDemoMode ? 'Try out the app with demo data' : 'Stay organized and productive' }}
+      </p>
+    </div>
+    <div class="header-actions">
+      @if (isDemoMode) {
+        <button class="btn btn-login" (click)="login()">
+          <span class="login-icon">🔐</span>
+          Login
+        </button>
+      }
+      @if (!isDemoMode) {
+        <button class="btn btn-logout" (click)="logout()">
+          <span class="logout-icon">🚪</span>
+          Logout
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Demo Mode Notice -->
+  @if (isDemoMode) {
+    <div class="demo-notice">
+      <div class="demo-content">
+        <span class="demo-icon">🎯</span>
+        <div class="demo-text">
+          <strong>Demo Mode</strong>
+          <p>You're using demo data. Create an account to save your tasks permanently.</p>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Stats -->
+  <div class="stats-container">
+    <div class="stat-card">
+      <div class="stat-number">{{ pendingTasksCount }}</div>
+      <div class="stat-label">Pending</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ completedTasksCount }}</div>
+      <div class="stat-label">Completed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ tasks.length }}</div>
+      <div class="stat-label">Total</div>
+    </div>
+  </div>
+
+  <!-- Add Task Form -->
+  <div class="add-task-section">
+    <form (ngSubmit)="addTask()" class="add-task-form">
+      <div class="input-group">
+        <input
+          type="text"
+          [(ngModel)]="newTaskText"
+          name="newTaskText"
+          placeholder="What needs to be done?"
+          class="task-input"
+          [disabled]="loading"
+        />
+        <button type="submit" class="btn btn-add" [disabled]="loading || !newTaskText.trim()">
+          @if (!loading) {
+            <span>+</span>
+          }
+          @if (loading) {
+            <span class="loading-spinner"></span>
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Error Message -->
+  @if (error) {
+    <div class="error-message">
+      {{ error }}
+      <button class="error-close" (click)="error = ''">×</button>
+    </div>
+  }
+
+  <!-- Loading State -->
+  @if (loading && tasks.length === 0) {
+    <div class="loading-state">
+      <div class="loading-spinner large"></div>
+      <p>Loading your tasks...</p>
+    </div>
+  }
+
+  <!-- Tasks List -->
+  @if (!loading || tasks.length > 0) {
+    <div class="tasks-list">
+      @if (tasks.length === 0 && !loading) {
+        <div class="empty-state">
+          <div class="empty-icon">📝</div>
+          <h3>No tasks yet</h3>
+          <p>Start by adding your first task above!</p>
+        </div>
+      }
+
+      @for (task of tasks; track trackByTaskId($index, task)) {
+        <div class="task-item" [class.completed]="task.done">
+          <!-- Task Checkbox -->
+          <div class="task-checkbox" (click)="toggleTaskDone(task)" [class.checked]="task.done">
+            @if (task.done) {
+              <span class="checkmark">✓</span>
+            }
+          </div>
+
+          <!-- Task Content -->
+          <div class="task-content">
+            <!-- View Mode -->
+            @if (editingTaskId !== task.id) {
+              <div class="task-view">
+                <span class="task-text" [class.completed-text]="task.done">
+                  {{ task.text }}
+                </span>
+                <div class="task-actions">
+                  <button class="btn-icon" (click)="startEdit(task)" title="Edit task">
+                    ✏️
+                  </button>
+                  <button class="btn-icon delete" (click)="deleteTask(task.id)" title="Delete task">
+                    🗑️
+                  </button>
+                </div>
+              </div>
+            }
+
+            <!-- Edit Mode -->
+            @if (editingTaskId === task.id) {
+              <div class="task-edit">
+                <input
+                  type="text"
+                  [(ngModel)]="editingTaskText"
+                  class="edit-input"
+                  (keyup.enter)="updateTask(task.id)"
+                  (keyup.escape)="cancelEdit()"
+                  autofocus
+                />
+                <div class="edit-actions">
+                  <button class="btn btn-save" (click)="updateTask(task.id)">
+                    Save
+                  </button>
+                  <button class="btn btn-cancel" (click)="cancelEdit()">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Loading Overlay -->
+  @if (loading && tasks.length > 0) {
+    <div class="loading-overlay">
+      <div class="loading-spinner"></div>
+    </div>
+  }
+</div>

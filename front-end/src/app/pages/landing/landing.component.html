@@ -1,0 +1,222 @@
+<div class="landing-container">
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="gradient-text">Organize Your Life</span>
+        <br>One Task at a Time
+      </h1>
+      <p class="hero-subtitle">
+        Stay productive and focused with our intuitive task management app. 
+        Create, organize, and complete your tasks with ease.
+      </p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" (click)="navigateToAuth()">
+          Get Started
+        </button>
+        <button class="btn btn-secondary" (click)="navigateToTasks()">
+          Try Demo
+        </button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="task-cards">
+        <div class="task-card completed">
+          <div class="task-checkbox checked"></div>
+          <span class="task-text">Complete project presentation</span>
+        </div>
+        <div class="task-card active">
+          <div class="task-checkbox"></div>
+          <span class="task-text">Review code changes</span>
+        </div>
+        <div class="task-card">
+          <div class="task-checkbox"></div>
+          <span class="task-text">Plan team meeting</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How It Works Section -->
+  <div class="how-it-works-section">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps-container">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-icon">📝</div>
+        <h3>Create Tasks</h3>
+        <p>Quickly add new tasks with our simple input field. Just type and press enter!</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-icon">✅</div>
+        <h3>Mark Complete</h3>
+        <p>Click the checkbox to mark tasks as done. Watch your progress grow!</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-icon">📊</div>
+        <h3>Track Progress</h3>
+        <p>Monitor your productivity with real-time statistics and insights.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="features-section" id="features">
+    <h2 class="section-title">Why Choose Our To-Do App?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3>Simple & Clean</h3>
+        <p>Intuitive interface that helps you focus on what matters most.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Secure</h3>
+        <p>Your data is protected with industry-standard security measures.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Fast & Responsive</h3>
+        <p>Lightning-fast performance across all your devices.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Cross-Platform</h3>
+        <p>Access your tasks from anywhere, anytime.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Section -->
+  <div class="stats-section">
+    <h2 class="section-title">Trusted by Thousands</h2>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number" data-target="10000">0</div>
+        <div class="stat-label">Active Users</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="500000">0</div>
+        <div class="stat-label">Tasks Completed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="99">0</div>
+        <div class="stat-label">Uptime %</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="4.9">0</div>
+        <div class="stat-label">User Rating</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="faq-section" id="faq">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question" (click)="toggleFaq(0)">
+          <span>Is the app free to use?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer" [class.active]="activeFaq === 0">
+          <p>Yes! Our basic features are completely free. You can create unlimited tasks and use all core features without any cost.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" (click)="toggleFaq(1)">
+          <span>Can I access my tasks from multiple devices?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer" [class.active]="activeFaq === 1">
+          <p>Absolutely! Your tasks are synced across all your devices. Just log in with your account from any device.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" (click)="toggleFaq(2)">
+          <span>How secure is my data?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer" [class.active]="activeFaq === 2">
+          <p>We use industry-standard encryption and security practices to protect your data. Your privacy is our top priority.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" (click)="toggleFaq(3)">
+          <span>Can I export my tasks?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer" [class.active]="activeFaq === 3">
+          <p>Yes! You can export your tasks in various formats including CSV and PDF for backup or sharing purposes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="contact-section" id="contact">
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div class="contact-details">
+            <h4>Email</h4>
+            <p>support at taskmaster.com</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div class="contact-details">
+            <h4>Live Chat</h4>
+            <p>Available 24/7</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div class="contact-details">
+            <h4>Social Media</h4>
+            <p>Follow us for updates</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3>Send us a message</h3>
+        <form class="contact-form-inputs">
+          <input type="text" placeholder="Your Name" class="contact-input">
+          <input type="email" placeholder="Your Email" class="contact-input">
+          <textarea placeholder="Your Message" class="contact-textarea"></textarea>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer class="landing-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>TaskMaster</h4>
+        <p>Organize your life, one task at a time.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#" (click)="navigateToAuth()">Login</a></li>
+          <li><a href="#" (click)="navigateToTasks()">Demo</a></li>
+          <li><a href="#" (click)="scrollToSection('features')">Features</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#" (click)="scrollToSection('faq')">FAQ</a></li>
+          <li><a href="#" (click)="scrollToSection('contact')">Contact</a></li>
+          <li><a href="#" (click)="showPrivacyInfo()">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 TaskMaster. Built with ❤️ using Angular & Node.js</p>
+    </div>
+  </footer>
+</div> 

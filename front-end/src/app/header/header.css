@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.nav {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 150px;
+  line-height: 100px;
+  background: linear-gradient(rgba(39, 39, 39, 0.6), transparent);
+  z-index: 100;
+}
+.nav-logo p {
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+}
+.nav-menu ul {
+  display: flex; /*عرض عناصر القايمه بالعرض */
+}
+.nav-menu ul li {
+  list-style-type: none; /*عشان امنع من ظهور اي ستايل حتي النقطه اللي قبل كل عنصر*/
+}
+.nav-menu ul li .link {
+  text-decoration: none;
+  font-weight: 500;
+  color: #fff;
+  padding-bottom: 15px;
+  margin: 0 25px; /*space between list elemints in nav bar*/
+}
+.link:hover,
+.active {
+  border-bottom: 2px solid #fff; /*when hover underline will appear*/
+}
+.nav-button .btn {
+  width: 130px;
+  height: 40px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer; /*when hover mouse>> pointer*/
+  transition: 0.3s ease; /*time for hover*/
+  margin-left: 15px; /*space between sign in and up btns*/
+}

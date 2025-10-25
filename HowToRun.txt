@@ -1,0 +1,8 @@
+back-end:
+1- cd back-end
+2- npm install
+3- npm start
+
+front-end:
+1- cd front-end
+2- ng serve
