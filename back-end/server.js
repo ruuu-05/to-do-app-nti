@@ -1,32 +1,47 @@
+// Import dependencies
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+
+// Import routes
 const authRoutes = require("./routes/auth");
 const todoRoutes = require("./routes/todoRoutes");
 
+// Load environment variables
 dotenv.config();
 
+// Initialize Express app
 const app = express();
-const PORT = 3000;
-const MONGO_URI = dotenv.config().parsed.MONGO_URI;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
+
+// API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", todoRoutes);
 
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODY5M2U3NzY0NzZiN2Q1ZWQyNGIwODMiLCJpYXQiOjE3NTE3Mjc5MDd9.Lveld_bfG3nrghmOJNvJB9cuIgZVbfKXH25YtK_SVx8
+// Root route (optional)
+app.get("/", (req, res) => {
+  res.send("Welcome to the To-Do API");
+});
+
+// MongoDB connection
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose
-  .connect(MONGO_URI)
-  .then(() => {
-    app.get("/", (req, res) => {
-      res.send("Welcome to the To-Do API 👋");
-    });
-
-    app.listen(PORT, () => {
-      console.log(`✅ Server running: http://localhost:${PORT}`);
-    });
+  .connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
-  .catch((err) => console.error("MongoDB error:", err));
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("MongoDB connection error:", err));
+
+// Export the Express app (important for Vercel)
+module.exports = app;
+
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
